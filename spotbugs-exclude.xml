@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <!-- Exclude generated code -->
+    <Match>
+        <Package name="~.*\.target\..*"/>
+    </Match>
+
+    <!-- Exclude MapStruct generated implementations -->
+    <Match>
+        <Class name="~.*MapperImpl$"/>
+    </Match>
+
+    <!-- Exclude Lombok generated code warnings -->
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+    </Match>
+
+    <!-- Exclude test classes from certain checks -->
+    <Match>
+        <Class name="~.*Test$"/>
+        <Bug pattern="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR"/>
+    </Match>
+</FindBugsFilter>

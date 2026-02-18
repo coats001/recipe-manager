@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <!--
+        OWASP Dependency-Check Suppressions
+
+        Use this file to suppress false positives or known issues that have been reviewed
+        and accepted by the security team.
+
+        To suppress a vulnerability:
+        1. Add a <suppress> block
+        2. Specify the file pattern or GAV coordinates
+        3. Add the CVE or vulnerability ID
+        4. Add a note explaining why it's suppressed
+        5. Add an expiry date for review
+    -->
+
+    <!-- Example: Suppress test dependencies -->
+    <!--
+    <suppress>
+        <notes>Test dependencies are not included in production</notes>
+        <filePath regex="true">.*[\\/]test-.*\.jar</filePath>
+        <cpe>cpe:/a:.*</cpe>
+    </suppress>
+    -->
+
+    <!-- Suppress false positives for Spring Boot DevTools (dev only) -->
+    <suppress>
+        <notes>DevTools is only used in development, not included in production builds</notes>
+        <gav regex="true">org\.springframework\.boot:spring-boot-devtools:.*</gav>
+        <cpe>cpe:/a:.*</cpe>
+    </suppress>
+
+    <!-- Add your suppressions below this line -->
+
+</suppressions>

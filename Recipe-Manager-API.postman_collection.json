@@ -1,0 +1,1672 @@
+{
+	"info": {
+		"_postman_id": "recipe-manager-api-collection",
+		"name": "Recipe Manager API - Complete Test Suite",
+		"description": "Comprehensive test collection for Recipe Manager API covering all endpoints and filter combinations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "recipe-manager"
+	},
+	"item": [
+		{
+			"name": "1. CRUD Operations",
+			"item": [
+				{
+					"name": "Create Recipe - Vegetarian Pasta",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response has id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.environment.set(\"recipe_id_1\", jsonData.id);",
+									"});",
+									"",
+									"pm.test(\"Recipe name is correct\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.eql(\"Vegetarian Pasta\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Vegetarian Pasta\",\n  \"vegetarian\": true,\n  \"servings\": 4,\n  \"instructions\": \"Boil pasta for 10 minutes. Add tomato sauce and vegetables. Bake in oven at 180°C for 20 minutes.\",\n  \"ingredients\": [\"pasta\", \"tomato sauce\", \"garlic\", \"onions\", \"bell peppers\", \"olive oil\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/recipes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"]
+						},
+						"description": "Create a vegetarian pasta recipe"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Recipe - Grilled Salmon",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"recipe_id_2\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Grilled Salmon\",\n  \"vegetarian\": false,\n  \"servings\": 2,\n  \"instructions\": \"Season salmon with salt and pepper. Grill on stovetop for 5 minutes per side.\",\n  \"ingredients\": [\"salmon\", \"salt\", \"pepper\", \"lemon\", \"butter\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/recipes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"]
+						},
+						"description": "Create a non-vegetarian salmon recipe"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Recipe - Potato Soup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"recipe_id_3\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Creamy Potato Soup\",\n  \"vegetarian\": true,\n  \"servings\": 6,\n  \"instructions\": \"Peel and dice potatoes. Boil in water for 15 minutes. Add cream and blend until smooth.\",\n  \"ingredients\": [\"potatoes\", \"cream\", \"onions\", \"garlic\", \"vegetable broth\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/recipes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"]
+						},
+						"description": "Create a vegetarian potato soup"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Recipe - Chicken Oven Bake",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"recipe_id_4\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Oven-Baked Chicken\",\n  \"vegetarian\": false,\n  \"servings\": 4,\n  \"instructions\": \"Season chicken with herbs. Place in oven at 200°C and bake for 45 minutes until golden brown.\",\n  \"ingredients\": [\"chicken\", \"rosemary\", \"thyme\", \"olive oil\", \"potatoes\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/recipes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"]
+						},
+						"description": "Create a non-vegetarian oven-baked chicken recipe"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Recipe - Vegetable Stir Fry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"recipe_id_5\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Quick Vegetable Stir Fry\",\n  \"vegetarian\": true,\n  \"servings\": 2,\n  \"instructions\": \"Heat wok on high heat. Stir fry vegetables for 5 minutes with soy sauce.\",\n  \"ingredients\": [\"broccoli\", \"carrots\", \"bell peppers\", \"soy sauce\", \"ginger\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/recipes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"]
+						},
+						"description": "Create a vegetarian stir fry recipe"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Recipe by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has all required fields\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData).to.have.property('name');",
+									"    pm.expect(jsonData).to.have.property('vegetarian');",
+									"    pm.expect(jsonData).to.have.property('servings');",
+									"    pm.expect(jsonData).to.have.property('instructions');",
+									"    pm.expect(jsonData).to.have.property('ingredients');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes/{{recipe_id_1}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes", "{{recipe_id_1}}"]
+						},
+						"description": "Retrieve a specific recipe by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Recipe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Recipe name updated\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.eql(\"Updated Vegetarian Pasta Deluxe\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Vegetarian Pasta Deluxe\",\n  \"vegetarian\": true,\n  \"servings\": 6,\n  \"instructions\": \"Boil pasta for 10 minutes. Add tomato sauce, vegetables, and cheese. Bake in oven at 180°C for 25 minutes.\",\n  \"ingredients\": [\"pasta\", \"tomato sauce\", \"garlic\", \"onions\", \"bell peppers\", \"olive oil\", \"mozzarella\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/recipes/{{recipe_id_1}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes", "{{recipe_id_1}}"]
+						},
+						"description": "Update an existing recipe"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Recipe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes/{{recipe_id_5}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes", "{{recipe_id_5}}"]
+						},
+						"description": "Delete a recipe by ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Basic CRUD operations for recipes"
+		},
+		{
+			"name": "2. Get All Recipes (No Filters)",
+			"item": [
+				{
+					"name": "Get All Recipes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an('array');",
+									"});",
+									"",
+									"pm.test(\"Array has multiple recipes\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length).to.be.greaterThan(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"]
+						},
+						"description": "Retrieve all recipes without any filters"
+					},
+					"response": []
+				}
+			],
+			"description": "Get all recipes without filtering"
+		},
+		{
+			"name": "3. Single Filter Tests",
+			"item": [
+				{
+					"name": "Filter by Vegetarian (true)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"All recipes are vegetarian\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    jsonData.forEach(function(recipe) {",
+									"        pm.expect(recipe.vegetarian).to.be.true;",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?vegetarian=true",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "vegetarian",
+									"value": "true"
+								}
+							]
+						},
+						"description": "Get only vegetarian recipes"
+					},
+					"response": []
+				},
+				{
+					"name": "Filter by Vegetarian (false)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"All recipes are non-vegetarian\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    jsonData.forEach(function(recipe) {",
+									"        pm.expect(recipe.vegetarian).to.be.false;",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?vegetarian=false",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "vegetarian",
+									"value": "false"
+								}
+							]
+						},
+						"description": "Get only non-vegetarian recipes"
+					},
+					"response": []
+				},
+				{
+					"name": "Filter by Servings (2)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"All recipes serve 2 people\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    jsonData.forEach(function(recipe) {",
+									"        pm.expect(recipe.servings).to.eql(2);",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?servings=2",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "servings",
+									"value": "2"
+								}
+							]
+						},
+						"description": "Get recipes that serve 2 people"
+					},
+					"response": []
+				},
+				{
+					"name": "Filter by Servings (4)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"All recipes serve 4 people\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    jsonData.forEach(function(recipe) {",
+									"        pm.expect(recipe.servings).to.eql(4);",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?servings=4",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "servings",
+									"value": "4"
+								}
+							]
+						},
+						"description": "Get recipes that serve 4 people"
+					},
+					"response": []
+				},
+				{
+					"name": "Filter by Servings (6)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?servings=6",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "servings",
+									"value": "6"
+								}
+							]
+						},
+						"description": "Get recipes that serve 6 people"
+					},
+					"response": []
+				},
+				{
+					"name": "Include Single Ingredient (potatoes)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"All recipes contain potatoes\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    jsonData.forEach(function(recipe) {",
+									"        pm.expect(recipe.ingredients).to.include('potatoes');",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?includeIngredients=potatoes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "includeIngredients",
+									"value": "potatoes"
+								}
+							]
+						},
+						"description": "Get recipes that include potatoes"
+					},
+					"response": []
+				},
+				{
+					"name": "Include Multiple Ingredients (garlic,onions)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"All recipes contain garlic and onions\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    jsonData.forEach(function(recipe) {",
+									"        pm.expect(recipe.ingredients).to.include('garlic');",
+									"        pm.expect(recipe.ingredients).to.include('onions');",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?includeIngredients=garlic,onions",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "includeIngredients",
+									"value": "garlic,onions"
+								}
+							]
+						},
+						"description": "Get recipes that include both garlic and onions"
+					},
+					"response": []
+				},
+				{
+					"name": "Exclude Single Ingredient (salmon)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"No recipes contain salmon\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    jsonData.forEach(function(recipe) {",
+									"        pm.expect(recipe.ingredients).to.not.include('salmon');",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?excludeIngredients=salmon",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "excludeIngredients",
+									"value": "salmon"
+								}
+							]
+						},
+						"description": "Get recipes that exclude salmon"
+					},
+					"response": []
+				},
+				{
+					"name": "Exclude Multiple Ingredients (salmon,chicken)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"No recipes contain salmon or chicken\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    jsonData.forEach(function(recipe) {",
+									"        pm.expect(recipe.ingredients).to.not.include('salmon');",
+									"        pm.expect(recipe.ingredients).to.not.include('chicken');",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?excludeIngredients=salmon,chicken",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "excludeIngredients",
+									"value": "salmon,chicken"
+								}
+							]
+						},
+						"description": "Get recipes that exclude both salmon and chicken"
+					},
+					"response": []
+				},
+				{
+					"name": "Search Text (oven)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"All recipes mention 'oven' in instructions\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    jsonData.forEach(function(recipe) {",
+									"        pm.expect(recipe.instructions.toLowerCase()).to.include('oven');",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?searchText=oven",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "searchText",
+									"value": "oven"
+								}
+							]
+						},
+						"description": "Get recipes that mention 'oven' in instructions"
+					},
+					"response": []
+				},
+				{
+					"name": "Search Text (boil)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?searchText=boil",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "searchText",
+									"value": "boil"
+								}
+							]
+						},
+						"description": "Get recipes that mention 'boil' in instructions"
+					},
+					"response": []
+				}
+			],
+			"description": "Test each filter parameter individually"
+		},
+		{
+			"name": "4. Two Filter Combinations",
+			"item": [
+				{
+					"name": "Vegetarian + Servings(4)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"All recipes are vegetarian and serve 4\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    jsonData.forEach(function(recipe) {",
+									"        pm.expect(recipe.vegetarian).to.be.true;",
+									"        pm.expect(recipe.servings).to.eql(4);",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?vegetarian=true&servings=4",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "vegetarian",
+									"value": "true"
+								},
+								{
+									"key": "servings",
+									"value": "4"
+								}
+							]
+						},
+						"description": "Get vegetarian recipes that serve 4 people"
+					},
+					"response": []
+				},
+				{
+					"name": "Vegetarian + Include(potatoes)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"All recipes are vegetarian with potatoes\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    jsonData.forEach(function(recipe) {",
+									"        pm.expect(recipe.vegetarian).to.be.true;",
+									"        pm.expect(recipe.ingredients).to.include('potatoes');",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?vegetarian=true&includeIngredients=potatoes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "vegetarian",
+									"value": "true"
+								},
+								{
+									"key": "includeIngredients",
+									"value": "potatoes"
+								}
+							]
+						},
+						"description": "Get vegetarian recipes with potatoes"
+					},
+					"response": []
+				},
+				{
+					"name": "Vegetarian + Exclude(salmon)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?vegetarian=true&excludeIngredients=salmon",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "vegetarian",
+									"value": "true"
+								},
+								{
+									"key": "excludeIngredients",
+									"value": "salmon"
+								}
+							]
+						},
+						"description": "Get vegetarian recipes without salmon"
+					},
+					"response": []
+				},
+				{
+					"name": "Vegetarian + SearchText(oven)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?vegetarian=true&searchText=oven",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "vegetarian",
+									"value": "true"
+								},
+								{
+									"key": "searchText",
+									"value": "oven"
+								}
+							]
+						},
+						"description": "Get vegetarian recipes mentioning oven"
+					},
+					"response": []
+				},
+				{
+					"name": "Servings(4) + Include(potatoes)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"All recipes serve 4 and have potatoes\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    jsonData.forEach(function(recipe) {",
+									"        pm.expect(recipe.servings).to.eql(4);",
+									"        pm.expect(recipe.ingredients).to.include('potatoes');",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?servings=4&includeIngredients=potatoes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "servings",
+									"value": "4"
+								},
+								{
+									"key": "includeIngredients",
+									"value": "potatoes"
+								}
+							]
+						},
+						"description": "Get recipes for 4 people with potatoes"
+					},
+					"response": []
+				},
+				{
+					"name": "Servings(2) + Exclude(chicken)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?servings=2&excludeIngredients=chicken",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "servings",
+									"value": "2"
+								},
+								{
+									"key": "excludeIngredients",
+									"value": "chicken"
+								}
+							]
+						},
+						"description": "Get recipes for 2 people without chicken"
+					},
+					"response": []
+				},
+				{
+					"name": "Include(potatoes) + Exclude(salmon)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"All recipes have potatoes but not salmon\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    jsonData.forEach(function(recipe) {",
+									"        pm.expect(recipe.ingredients).to.include('potatoes');",
+									"        pm.expect(recipe.ingredients).to.not.include('salmon');",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?includeIngredients=potatoes&excludeIngredients=salmon",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "includeIngredients",
+									"value": "potatoes"
+								},
+								{
+									"key": "excludeIngredients",
+									"value": "salmon"
+								}
+							]
+						},
+						"description": "Get recipes with potatoes but without salmon"
+					},
+					"response": []
+				},
+				{
+					"name": "Exclude(salmon) + SearchText(oven)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"All recipes don't have salmon and mention oven\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    jsonData.forEach(function(recipe) {",
+									"        pm.expect(recipe.ingredients).to.not.include('salmon');",
+									"        pm.expect(recipe.instructions.toLowerCase()).to.include('oven');",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?excludeIngredients=salmon&searchText=oven",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "excludeIngredients",
+									"value": "salmon"
+								},
+								{
+									"key": "searchText",
+									"value": "oven"
+								}
+							]
+						},
+						"description": "Get recipes without salmon that mention oven"
+					},
+					"response": []
+				}
+			],
+			"description": "Test combinations of two filters"
+		},
+		{
+			"name": "5. Three Filter Combinations",
+			"item": [
+				{
+					"name": "Vegetarian + Servings(4) + Include(potatoes)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?vegetarian=true&servings=4&includeIngredients=potatoes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "vegetarian",
+									"value": "true"
+								},
+								{
+									"key": "servings",
+									"value": "4"
+								},
+								{
+									"key": "includeIngredients",
+									"value": "potatoes"
+								}
+							]
+						},
+						"description": "Vegetarian recipes for 4 with potatoes"
+					},
+					"response": []
+				},
+				{
+					"name": "Vegetarian + Include(onions) + SearchText(oven)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?vegetarian=true&includeIngredients=onions&searchText=oven",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "vegetarian",
+									"value": "true"
+								},
+								{
+									"key": "includeIngredients",
+									"value": "onions"
+								},
+								{
+									"key": "searchText",
+									"value": "oven"
+								}
+							]
+						},
+						"description": "Vegetarian recipes with onions mentioning oven"
+					},
+					"response": []
+				},
+				{
+					"name": "Servings(4) + Exclude(salmon) + SearchText(bake)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?servings=4&excludeIngredients=salmon&searchText=bake",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "servings",
+									"value": "4"
+								},
+								{
+									"key": "excludeIngredients",
+									"value": "salmon"
+								},
+								{
+									"key": "searchText",
+									"value": "bake"
+								}
+							]
+						},
+						"description": "Recipes for 4 without salmon mentioning bake"
+					},
+					"response": []
+				},
+				{
+					"name": "Include(garlic,onions) + Exclude(chicken)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?includeIngredients=garlic,onions&excludeIngredients=chicken",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "includeIngredients",
+									"value": "garlic,onions"
+								},
+								{
+									"key": "excludeIngredients",
+									"value": "chicken"
+								}
+							]
+						},
+						"description": "Recipes with garlic and onions but no chicken"
+					},
+					"response": []
+				}
+			],
+			"description": "Test combinations of three filters"
+		},
+		{
+			"name": "6. Four+ Filter Combinations",
+			"item": [
+				{
+					"name": "Vegetarian + Servings(4) + Include(potatoes) + SearchText(oven)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?vegetarian=true&servings=4&includeIngredients=potatoes&searchText=oven",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "vegetarian",
+									"value": "true"
+								},
+								{
+									"key": "servings",
+									"value": "4"
+								},
+								{
+									"key": "includeIngredients",
+									"value": "potatoes"
+								},
+								{
+									"key": "searchText",
+									"value": "oven"
+								}
+							]
+						},
+						"description": "Vegetarian recipes for 4 with potatoes mentioning oven"
+					},
+					"response": []
+				},
+				{
+					"name": "All 5 Filters Combined",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Result matches all filter criteria\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.length > 0) {",
+									"        jsonData.forEach(function(recipe) {",
+									"            pm.expect(recipe.vegetarian).to.be.true;",
+									"            pm.expect(recipe.servings).to.eql(4);",
+									"            pm.expect(recipe.ingredients).to.include('potatoes');",
+									"            pm.expect(recipe.ingredients).to.not.include('salmon');",
+									"            pm.expect(recipe.instructions.toLowerCase()).to.include('oven');",
+									"        });",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?vegetarian=true&servings=4&includeIngredients=potatoes&excludeIngredients=salmon&searchText=oven",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "vegetarian",
+									"value": "true"
+								},
+								{
+									"key": "servings",
+									"value": "4"
+								},
+								{
+									"key": "includeIngredients",
+									"value": "potatoes"
+								},
+								{
+									"key": "excludeIngredients",
+									"value": "salmon"
+								},
+								{
+									"key": "searchText",
+									"value": "oven"
+								}
+							]
+						},
+						"description": "All 5 filters combined: vegetarian, 4 servings, with potatoes, no salmon, mentions oven"
+					},
+					"response": []
+				},
+				{
+					"name": "Complex - Multiple Includes & Excludes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?includeIngredients=garlic,onions,olive oil&excludeIngredients=salmon,chicken&searchText=bake",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "includeIngredients",
+									"value": "garlic,onions,olive oil"
+								},
+								{
+									"key": "excludeIngredients",
+									"value": "salmon,chicken"
+								},
+								{
+									"key": "searchText",
+									"value": "bake"
+								}
+							]
+						},
+						"description": "Complex filter with multiple includes and excludes"
+					},
+					"response": []
+				}
+			],
+			"description": "Test combinations of four or more filters"
+		},
+		{
+			"name": "7. Edge Cases & Validation",
+			"item": [
+				{
+					"name": "Invalid Recipe ID (404)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes/99999",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes", "99999"]
+						},
+						"description": "Try to get non-existent recipe"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Invalid Recipe (400) - Missing Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"vegetarian\": true,\n  \"servings\": 4,\n  \"instructions\": \"Test instructions\",\n  \"ingredients\": [\"test\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/recipes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"]
+						},
+						"description": "Try to create recipe without name"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Invalid Recipe (400) - Invalid Servings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Test Recipe\",\n  \"vegetarian\": true,\n  \"servings\": 0,\n  \"instructions\": \"Test instructions\",\n  \"ingredients\": [\"test\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/recipes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"]
+						},
+						"description": "Try to create recipe with invalid servings (0)"
+					},
+					"response": []
+				},
+				{
+					"name": "No Results - Very Specific Filters",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Empty array returned\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an('array');",
+									"    pm.expect(jsonData.length).to.eql(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?vegetarian=true&servings=100&includeIngredients=unicorn,dragon",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "vegetarian",
+									"value": "true"
+								},
+								{
+									"key": "servings",
+									"value": "100"
+								},
+								{
+									"key": "includeIngredients",
+									"value": "unicorn,dragon"
+								}
+							]
+						},
+						"description": "Filter combination that returns no results"
+					},
+					"response": []
+				},
+				{
+					"name": "Empty String Search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recipes?searchText=",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recipes"],
+							"query": [
+								{
+									"key": "searchText",
+									"value": ""
+								}
+							]
+						},
+						"description": "Search with empty string"
+					},
+					"response": []
+				}
+			],
+			"description": "Test edge cases and validation scenarios"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

@@ -1,0 +1,94 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< org.amoscoats:recipe-manager >--------------------
+[INFO] Building recipe-manager 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:4.0.2:run (default-cli) > test-compile @ recipe-manager >>>
+[INFO] 
+[INFO] --- checkstyle:3.5.0:check (validate) @ recipe-manager ---
+[INFO] Starting audit...
+[WARN] /Users/coats/Dropbox/Bedrijf/2026/ABNAMRO/recipe-manager/src/main/java/org/amoscoats/recipemanager/config/OpenAPIConfig.java:14:14: Abbreviation in name 'OpenAPIConfig' must contain no more than '1' consecutive capital letters. [AbbreviationAsWordInName]
+Audit done.
+[WARNING] src/main/java/org/amoscoats/recipemanager/config/OpenAPIConfig.java:[14,14] (naming) AbbreviationAsWordInName: Abbreviation in name 'OpenAPIConfig' must contain no more than '1' consecutive capital letters.
+[WARNING] checkstyle:check violations detected but failOnViolation set to false
+[INFO] You have 1 Checkstyle violation.
+[INFO] 
+[INFO] --- jacoco:0.8.11:prepare-agent (default) @ recipe-manager ---
+[INFO] argLine set to -javaagent:/Users/coats/.m2/repository/org/jacoco/org.jacoco.agent/0.8.11/org.jacoco.agent-0.8.11-runtime.jar=destfile=/Users/coats/Dropbox/Bedrijf/2026/ABNAMRO/recipe-manager/target/jacoco.exec,excludes=**/mapper/*Impl.class:**/mapper/*Impl$*.class:**/RecipeManagerApplication.class:**/ServletInitializer.class:**/TestcontainersConfiguration.class
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ recipe-manager ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ recipe-manager ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ recipe-manager ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ recipe-manager ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 14 source files with javac [debug parameters release 21] to target/test-classes
+[INFO] /Users/coats/Dropbox/Bedrijf/2026/ABNAMRO/recipe-manager/src/test/java/org/amoscoats/recipemanager/service/RecipeServiceTest.java: /Users/coats/Dropbox/Bedrijf/2026/ABNAMRO/recipe-manager/src/test/java/org/amoscoats/recipemanager/service/RecipeServiceTest.java uses unchecked or unsafe operations.
+[INFO] /Users/coats/Dropbox/Bedrijf/2026/ABNAMRO/recipe-manager/src/test/java/org/amoscoats/recipemanager/service/RecipeServiceTest.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] <<< spring-boot:4.0.2:run (default-cli) < test-compile @ recipe-manager <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:4.0.2:run (default-cli) @ recipe-manager ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.2)
+
+2026-02-18T06:24:30.665+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] o.a.r.RecipeManagerApplication           : Starting RecipeManagerApplication using Java 21.0.7 with PID 88546 (/Users/coats/Dropbox/Bedrijf/2026/ABNAMRO/recipe-manager/target/classes started by coats in /Users/coats/Dropbox/Bedrijf/2026/ABNAMRO/recipe-manager)
+2026-02-18T06:24:30.666+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] o.a.r.RecipeManagerApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-02-18T06:24:30.686+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-02-18T06:24:30.686+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-02-18T06:24:31.033+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-18T06:24:31.056+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 18 ms. Found 1 JPA repository interface.
+2026-02-18T06:24:31.298+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2026-02-18T06:24:31.304+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-18T06:24:31.304+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-18T06:24:31.327+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 639 ms
+2026-02-18T06:24:31.467+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-18T06:24:31.515+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4eab014b
+2026-02-18T06:24:31.516+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-18T06:24:31.528+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:5432/recipes (PostgreSQL 17.8)
+2026-02-18T06:24:31.553+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.012s)
+2026-02-18T06:24:31.563+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 1
+2026-02-18T06:24:31.564+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2026-02-18T06:24:31.591+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-02-18T06:24:31.615+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-02-18T06:24:31.805+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-18T06:24:31.844+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/recipes]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.8
+	Default catalog/schema: recipes/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-18T06:24:32.209+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-18T06:24:32.237+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-18T06:24:32.271+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-18T06:24:32.528+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+2026-02-18T06:24:32.560+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2026-02-18T06:24:32.565+01:00  INFO 88546 --- [recipe-manager] [  restartedMain] o.a.r.RecipeManagerApplication           : Started RecipeManagerApplication in 2.057 seconds (process running for 2.24)
+2026-02-18T07:48:00.011+01:00  INFO 88546 --- [recipe-manager] [ionShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-18T07:48:00.047+01:00  INFO 88546 --- [recipe-manager] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-02-18T07:48:00.052+01:00  INFO 88546 --- [recipe-manager] [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-18T07:48:00.055+01:00  INFO 88546 --- [recipe-manager] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-02-18T07:48:00.057+01:00  INFO 88546 --- [recipe-manager] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
