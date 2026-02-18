@@ -3,15 +3,14 @@ package org.amoscoats.recipemanager.mapper;
 import org.amoscoats.recipemanager.dto.RecipeRequest;
 import org.amoscoats.recipemanager.dto.RecipeResponse;
 import org.amoscoats.recipemanager.entity.Recipe;
-import org.mapstruct.CollectionMappingStrategy;
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 /** MapStruct mapper for Recipe entity and DTOs. */
-@Mapper(
-    componentModel = "spring",
-    collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED)
+@Mapper(componentModel = "spring")
 public interface RecipeMapper {
 
   /**
@@ -38,5 +37,6 @@ public interface RecipeMapper {
    * @param recipe the existing recipe entity to update
    */
   @Mapping(target = "id", ignore = true)
+  @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
   void updateEntity(RecipeRequest request, @MappingTarget Recipe recipe);
 }
