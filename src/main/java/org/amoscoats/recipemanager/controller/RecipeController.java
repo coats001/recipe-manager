@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.amoscoats.recipemanager.dto.RecipeRequest;
 import org.amoscoats.recipemanager.dto.RecipeResponse;
 import org.amoscoats.recipemanager.service.RecipeService;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /** REST controller for recipe management operations. */
+@Slf4j
 @RestController
 @RequestMapping("/api/recipes")
 @RequiredArgsConstructor
@@ -61,7 +63,10 @@ public class RecipeController {
   public ResponseEntity<RecipeResponse> createRecipe(
       @Parameter(description = "Recipe details to create", required = true) @Valid @RequestBody
           RecipeRequest request) {
+    log.info("Creating new recipe with name: {}", request.getName());
+    log.debug("Recipe details: {}", request);
     RecipeResponse response = recipeService.createRecipe(request);
+    log.info("Successfully created recipe with id: {}", response.getId());
     return ResponseEntity.status(HttpStatus.CREATED).body(response);
   }
 
@@ -95,7 +100,10 @@ public class RecipeController {
       @Parameter(description = "Recipe ID", required = true, example = "1") @PathVariable Long id,
       @Parameter(description = "Updated recipe details", required = true) @Valid @RequestBody
           RecipeRequest request) {
+    log.info("Updating recipe with id: {}", id);
+    log.debug("Updated recipe details: {}", request);
     RecipeResponse response = recipeService.updateRecipe(id, request);
+    log.info("Successfully updated recipe with id: {}", id);
     return ResponseEntity.ok(response);
   }
 
@@ -118,7 +126,9 @@ public class RecipeController {
   public ResponseEntity<Void> deleteRecipe(
       @Parameter(description = "Recipe ID to delete", required = true, example = "1")
           @PathVariable Long id) {
+    log.info("Deleting recipe with id: {}", id);
     recipeService.deleteRecipe(id);
+    log.info("Successfully deleted recipe with id: {}", id);
     return ResponseEntity.noContent().build();
   }
 
@@ -145,7 +155,9 @@ public class RecipeController {
   @GetMapping("/{id}")
   public ResponseEntity<RecipeResponse> getRecipeById(
       @Parameter(description = "Recipe ID", required = true, example = "1") @PathVariable Long id) {
+    log.info("Fetching recipe with id: {}", id);
     RecipeResponse response = recipeService.getRecipeById(id);
+    log.debug("Retrieved recipe: {}", response);
     return ResponseEntity.ok(response);
   }
 
@@ -208,14 +220,25 @@ public class RecipeController {
         && (includeIngredients == null || includeIngredients.isEmpty())
         && (excludeIngredients == null || excludeIngredients.isEmpty())
         && (searchText == null || searchText.isEmpty())) {
+      log.info("Fetching all recipes");
       List<RecipeResponse> recipes = recipeService.getAllRecipes();
+      log.info("Retrieved {} recipes", recipes.size());
       return ResponseEntity.ok(recipes);
     }
 
     // Otherwise, apply filters
+    log.info(
+        "Filtering recipes with criteria - vegetarian: {}, servings: {}, includeIngredients: {},"
+            + " excludeIngredients: {}, searchText: {}",
+        vegetarian,
+        servings,
+        includeIngredients,
+        excludeIngredients,
+        searchText);
     List<RecipeResponse> recipes =
         recipeService.filterRecipes(
             vegetarian, servings, includeIngredients, excludeIngredients, searchText);
+    log.info("Found {} recipes matching the filter criteria", recipes.size());
     return ResponseEntity.ok(recipes);
   }
 }

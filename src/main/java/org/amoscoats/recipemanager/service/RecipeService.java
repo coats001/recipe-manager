@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.amoscoats.recipemanager.dto.RecipeRequest;
 import org.amoscoats.recipemanager.dto.RecipeResponse;
 import org.amoscoats.recipemanager.entity.Recipe;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /** Service for recipe management business logic. */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -30,8 +32,11 @@ public class RecipeService {
    * @return created recipe response
    */
   public RecipeResponse createRecipe(RecipeRequest request) {
+    log.info("Creating new recipe with name: {}", request.getName());
+    log.debug("Recipe request details: {}", request);
     Recipe recipe = recipeMapper.toEntity(request);
     Recipe savedRecipe = recipeRepository.save(recipe);
+    log.info("Successfully created recipe with id: {}", savedRecipe.getId());
     return recipeMapper.toResponse(savedRecipe);
   }
 
@@ -43,10 +48,15 @@ public class RecipeService {
    * @return updated recipe response
    */
   public RecipeResponse updateRecipe(Long id, RecipeRequest request) {
+    log.info("Updating recipe with id: {}", id);
+    log.debug("Update request details: {}", request);
     Recipe recipe =
         recipeRepository
             .findById(id)
-            .orElseThrow(() -> new RuntimeException("Recipe not found with id: " + id));
+            .orElseThrow(() -> {
+              log.error("Recipe not found with id: {}", id);
+              return new RuntimeException("Recipe not found with id: " + id);
+            });
 
     // Update all fields
     recipe.setName(request.getName());
@@ -58,6 +68,7 @@ public class RecipeService {
     recipe.setIngredients(new java.util.HashSet<>(request.getIngredients()));
 
     Recipe updatedRecipe = recipeRepository.save(recipe);
+    log.info("Successfully updated recipe with id: {}", id);
     return recipeMapper.toResponse(updatedRecipe);
   }
 
@@ -67,10 +78,13 @@ public class RecipeService {
    * @param id recipe ID to delete
    */
   public void deleteRecipe(Long id) {
+    log.info("Deleting recipe with id: {}", id);
     if (!recipeRepository.existsById(id)) {
+      log.error("Cannot delete recipe - not found with id: {}", id);
       throw new RuntimeException("Recipe not found with id: " + id);
     }
     recipeRepository.deleteById(id);
+    log.info("Successfully deleted recipe with id: {}", id);
   }
 
   /**
@@ -81,10 +95,15 @@ public class RecipeService {
    */
   @Transactional(readOnly = true)
   public RecipeResponse getRecipeById(Long id) {
+    log.info("Fetching recipe with id: {}", id);
     Recipe recipe =
         recipeRepository
             .findById(id)
-            .orElseThrow(() -> new RuntimeException("Recipe not found with id: " + id));
+            .orElseThrow(() -> {
+              log.error("Recipe not found with id: {}", id);
+              return new RuntimeException("Recipe not found with id: " + id);
+            });
+    log.debug("Retrieved recipe: {}", recipe);
     return recipeMapper.toResponse(recipe);
   }
 
@@ -95,9 +114,12 @@ public class RecipeService {
    */
   @Transactional(readOnly = true)
   public List<RecipeResponse> getAllRecipes() {
-    return recipeRepository.findAll().stream()
+    log.info("Fetching all recipes");
+    List<RecipeResponse> recipes = recipeRepository.findAll().stream()
         .map(recipeMapper::toResponse)
         .collect(Collectors.toList());
+    log.info("Retrieved {} recipes", recipes.size());
+    return recipes;
   }
 
   /**
@@ -117,12 +139,16 @@ public class RecipeService {
       Set<String> includeIngredients,
       Set<String> excludeIngredients,
       String searchText) {
+    log.info("Filtering recipes with criteria - vegetarian: {}, servings: {}, includeIngredients: {}, excludeIngredients: {}, searchText: {}",
+        vegetarian, servings, includeIngredients, excludeIngredients, searchText);
     Specification<Recipe> spec =
         RecipeSpecification.filterRecipes(
             vegetarian, servings, includeIngredients, excludeIngredients, searchText);
 
-    return recipeRepository.findAll(spec).stream()
+    List<RecipeResponse> recipes = recipeRepository.findAll(spec).stream()
         .map(recipeMapper::toResponse)
         .collect(Collectors.toList());
+    log.info("Found {} recipes matching filter criteria", recipes.size());
+    return recipes;
   }
 }

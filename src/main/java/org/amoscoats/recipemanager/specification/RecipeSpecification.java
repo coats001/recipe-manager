@@ -7,10 +7,12 @@ import jakarta.persistence.criteria.Subquery;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import lombok.extern.slf4j.Slf4j;
 import org.amoscoats.recipemanager.entity.Recipe;
 import org.springframework.data.jpa.domain.Specification;
 
 /** Specification builder for Recipe entity queries. */
+@Slf4j
 public class RecipeSpecification {
 
   /**
@@ -29,21 +31,26 @@ public class RecipeSpecification {
       Set<String> includeIngredients,
       Set<String> excludeIngredients,
       String searchText) {
+    log.debug("Building specification with filters - vegetarian: {}, servings: {}, includeIngredients: {}, excludeIngredients: {}, searchText: {}",
+        vegetarian, servings, includeIngredients, excludeIngredients, searchText);
     return (root, query, criteriaBuilder) -> {
       List<Predicate> predicates = new ArrayList<>();
 
       // Filter by vegetarian
       if (vegetarian != null) {
+        log.debug("Adding vegetarian filter: {}", vegetarian);
         predicates.add(criteriaBuilder.equal(root.get("vegetarian"), vegetarian));
       }
 
       // Filter by servings
       if (servings != null) {
+        log.debug("Adding servings filter: {}", servings);
         predicates.add(criteriaBuilder.equal(root.get("servings"), servings));
       }
 
       // Include specific ingredients
       if (includeIngredients != null && !includeIngredients.isEmpty()) {
+        log.debug("Adding include ingredients filter: {}", includeIngredients);
         for (String ingredient : includeIngredients) {
           Join<Recipe, String> ingredientsJoin = root.join("ingredients");
           predicates.add(
@@ -55,6 +62,7 @@ public class RecipeSpecification {
 
       // Exclude specific ingredients
       if (excludeIngredients != null && !excludeIngredients.isEmpty()) {
+        log.debug("Adding exclude ingredients filter: {}", excludeIngredients);
         for (String ingredient : excludeIngredients) {
           Subquery<Long> subquery = query.subquery(Long.class);
           Root<Recipe> subRoot = subquery.from(Recipe.class);
@@ -75,6 +83,7 @@ public class RecipeSpecification {
 
       // Search text within instructions
       if (searchText != null && !searchText.isEmpty()) {
+        log.debug("Adding search text filter: {}", searchText);
         predicates.add(
             criteriaBuilder.like(
                 criteriaBuilder.lower(root.get("instructions")),
@@ -84,6 +93,7 @@ public class RecipeSpecification {
       // Make distinct to avoid duplicates from joins
       query.distinct(true);
 
+      log.debug("Built specification with {} predicates", predicates.size());
       return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     };
   }

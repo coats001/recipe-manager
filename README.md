@@ -4,6 +4,14 @@
 
 A **production-ready Spring Boot REST API** for managing favorite recipes with advanced filtering capabilities, comprehensive testing, static code analysis, and interactive API documentation.
 
+### 📂 Well-Organized Structure
+This project follows best practices with a clean, organized structure:
+- **`documentation/`** - All documentation files (30+ guides)
+- **`scripts/`** - Automation scripts for common tasks
+- **`code-quality/`** - Code quality and formatting configurations
+- **`src/`** - Source code with clean architecture
+- **`target/`** - Build output and reports
+
 ---
 
 ## 🚀 Quick Start
@@ -28,6 +36,8 @@ docker run --name postgres-recipes \
 ```bash
 cd /Users/coats/Dropbox/Bedrijf/2026/ABNAMRO/recipe-manager
 ./mvnw spring-boot:run
+# Or use the script
+./scripts/run-unit-tests.sh
 ```
 
 ### 4. Access API Documentation
@@ -85,7 +95,7 @@ All filters can be combined!
 
 **Run Analysis:**
 ```bash
-./code-analysis.sh
+./scripts/code-analysis.sh
 ```
 
 ### ✅ Security Testing
@@ -98,7 +108,7 @@ All filters can be combined!
 
 **Run Security Scan:**
 ```bash
-./security-check.sh
+./scripts/security-check.sh
 ```
 
 **What Gets Checked:**
@@ -147,6 +157,38 @@ All filters can be combined!
 
 ```
 recipe-manager/
+├── code-quality/                                ✅ Code quality configurations
+│   ├── dependency-check-suppressions.xml       ✅ OWASP suppressions
+│   ├── eclipse-java-google-style.xml           ✅ Eclipse formatter
+│   ├── effective-pom.xml                       ✅ Effective POM
+│   ├── intellij-java-google-style.xml          ✅ IntelliJ formatter
+│   └── spotbugs-exclude.xml                    ✅ SpotBugs exclusions
+├── documentation/                               ✅ All documentation files
+│   ├── BUILD-SUCCESS-FINAL.md                  ✅ Build summary
+│   ├── OPENAPI-SETUP-GUIDE.md                  ✅ API docs guide (600+ lines)
+│   ├── OPENAPI-QUICK-REFERENCE.md              ✅ Quick reference
+│   ├── OPENAPI-SUMMARY.md                      ✅ Setup summary
+│   ├── CODE-ANALYSIS-GUIDE.md                  ✅ Analysis guide (400+ lines)
+│   ├── CODE-ANALYSIS-QUICKREF.md               ✅ Quick reference
+│   ├── CODE-ANALYSIS-SETUP-COMPLETE.md         ✅ Setup details
+│   ├── CODE-ANALYSIS-VISUAL-GUIDE.md           ✅ Visual diagrams
+│   ├── README-CODE-ANALYSIS.md                 ✅ Analysis summary
+│   ├── UNIT-TESTS-SUMMARY.md                   ✅ Unit test docs
+│   ├── INTEGRATION-TESTS-SUMMARY.md            ✅ Integration test docs
+│   ├── TEST-QUICK-REFERENCE.md                 ✅ Test commands
+│   ├── FINAL-TEST-SUMMARY.md                   ✅ Complete test overview
+│   ├── SECURITY-TESTING-GUIDE.md               ✅ Security guide (500+ lines)
+│   ├── SECURITY-QUICK-REFERENCE.md             ✅ Security commands
+│   ├── POSTMAN-COLLECTION-GUIDE.md             ✅ Postman guide
+│   ├── LOGGING-SUMMARY.md                      ✅ Logging documentation
+│   └── [30+ other documentation files]         ✅ Comprehensive docs
+├── scripts/                                     ✅ Automation scripts
+│   ├── apply-google-style.sh                   ✅ Apply code style
+│   ├── code-analysis.sh                        ✅ Run all analysis
+│   ├── install-java-21.sh                      ✅ Java 21 setup
+│   ├── run-unit-tests.sh                       ✅ Run tests
+│   ├── security-check.sh                       ✅ Security scanning
+│   └── test-api.sh                             ✅ API testing
 ├── src/
 │   ├── main/
 │   │   ├── java/org/amoscoats/recipemanager/
@@ -190,22 +232,11 @@ recipe-manager/
 │           └── dto/
 │               ├── RecipeRequestTest.java               ✅ DTO tests
 │               └── RecipeResponseTest.java              ✅ DTO tests
+├── target/                                      ✅ Build output
 ├── pom.xml                                      ✅ Maven configuration
-├── spotbugs-exclude.xml                         ✅ SpotBugs exclusions
-├── code-analysis.sh                             ✅ Analysis automation
-└── Documentation/                               ✅ Comprehensive docs
-    ├── OPENAPI-SETUP-GUIDE.md                   (600+ lines)
-    ├── OPENAPI-QUICK-REFERENCE.md
-    ├── OPENAPI-SUMMARY.md
-    ├── CODE-ANALYSIS-GUIDE.md                   (400+ lines)
-    ├── CODE-ANALYSIS-QUICKREF.md
-    ├── CODE-ANALYSIS-SETUP-COMPLETE.md
-    ├── CODE-ANALYSIS-VISUAL-GUIDE.md
-    ├── README-CODE-ANALYSIS.md
-    ├── UNIT-TESTS-SUMMARY.md
-    ├── INTEGRATION-TESTS-SUMMARY.md
-    ├── TEST-QUICK-REFERENCE.md
-    └── FINAL-TEST-SUMMARY.md
+├── Recipe-Manager-API.postman_collection.json   ✅ Postman test suite
+├── google-java-format.jar                       ✅ Code formatter
+└── README.md                                    ✅ This file
 ```
 
 ---
@@ -280,7 +311,7 @@ recipe-manager/
 ### Code Analysis
 ```bash
 # Run all analysis tools
-./code-analysis.sh
+./scripts/code-analysis.sh
 
 # Individual tools
 ./mvnw spotbugs:check     # Bug detection
@@ -295,7 +326,7 @@ open target/site/index.html
 ### Security Testing
 ```bash
 # Run all security checks
-./security-check.sh
+./scripts/security-check.sh
 
 # Individual security scans
 ./mvnw dependency-check:check  # CVE scanning
@@ -324,36 +355,49 @@ open http://localhost:8080/swagger-ui.html
 
 ### Getting Started
 - **This File** - Complete overview
-- `HELP.md` - Spring Boot generated help
+- `documentation/HELP.md` - Spring Boot generated help
 
 ### API Documentation
-- `OPENAPI-SETUP-GUIDE.md` - Complete OpenAPI guide (600+ lines)
-- `OPENAPI-QUICK-REFERENCE.md` - Quick command reference
-- `OPENAPI-SUMMARY.md` - Setup summary
+- `documentation/OPENAPI-SETUP-GUIDE.md` - Complete OpenAPI guide (600+ lines)
+- `documentation/OPENAPI-QUICK-REFERENCE.md` - Quick command reference
+- `documentation/OPENAPI-SUMMARY.md` - Setup summary
 - **Live Docs**: http://localhost:8080/swagger-ui.html
 
 ### Postman Collection
 - `Recipe-Manager-API.postman_collection.json` - Complete test suite
-- `POSTMAN-COLLECTION-GUIDE.md` - Collection usage guide
+- `documentation/POSTMAN-COLLECTION-GUIDE.md` - Collection usage guide
 - **41 test requests** covering all scenarios
 
 ### Testing
-- `UNIT-TESTS-SUMMARY.md` - Unit test documentation
-- `INTEGRATION-TESTS-SUMMARY.md` - Integration test docs
-- `TEST-QUICK-REFERENCE.md` - Test commands
-- `FINAL-TEST-SUMMARY.md` - Complete test overview
+- `documentation/UNIT-TESTS-SUMMARY.md` - Unit test documentation
+- `documentation/INTEGRATION-TESTS-SUMMARY.md` - Integration test docs
+- `documentation/TEST-QUICK-REFERENCE.md` - Test commands
+- `documentation/FINAL-TEST-SUMMARY.md` - Complete test overview
 
 ### Code Quality
-- `CODE-ANALYSIS-GUIDE.md` - Complete analysis guide (400+ lines)
-- `CODE-ANALYSIS-QUICKREF.md` - Quick reference
-- `CODE-ANALYSIS-SETUP-COMPLETE.md` - Setup details
-- `CODE-ANALYSIS-VISUAL-GUIDE.md` - Visual diagrams
-- `README-CODE-ANALYSIS.md` - Analysis summary
+- `documentation/CODE-ANALYSIS-GUIDE.md` - Complete analysis guide (400+ lines)
+- `documentation/CODE-ANALYSIS-QUICKREF.md` - Quick reference
+- `documentation/CODE-ANALYSIS-SETUP-COMPLETE.md` - Setup details
+- `documentation/CODE-ANALYSIS-VISUAL-GUIDE.md` - Visual diagrams
+- `documentation/README-CODE-ANALYSIS.md` - Analysis summary
 
 ### Security Testing
-- `SECURITY-TESTING-GUIDE.md` - Complete security guide (500+ lines)
-- `SECURITY-QUICK-REFERENCE.md` - Quick commands
+- `documentation/SECURITY-TESTING-GUIDE.md` - Complete security guide (500+ lines)
+- `documentation/SECURITY-QUICK-REFERENCE.md` - Quick commands
 - **Security Reports**: `target/dependency-check-report.html`
+
+### Build & Setup
+- `documentation/BUILD-SUCCESS-FINAL.md` - Build success summary
+- `documentation/JAVA-21-VERIFIED.md` - Java 21 setup details
+- `documentation/LOGGING-SUMMARY.md` - Logging implementation
+
+### Scripts
+- `scripts/code-analysis.sh` - Run all code quality checks
+- `scripts/security-check.sh` - Run security scanning
+- `scripts/run-unit-tests.sh` - Execute test suite
+- `scripts/test-api.sh` - Test API endpoints
+- `scripts/apply-google-style.sh` - Apply code formatting
+- `scripts/install-java-21.sh` - Setup Java 21
 
 ---
 
@@ -456,7 +500,7 @@ curl -X DELETE http://localhost:8080/api/recipes/1
 
 ### Before Pull Request
 ```bash
-./code-analysis.sh
+./scripts/code-analysis.sh
 # Review all reports
 # Fix any critical issues
 ```
@@ -512,7 +556,7 @@ curl -X DELETE http://localhost:8080/api/recipes/1
 1. Start application: `./mvnw spring-boot:run`
 2. Open Swagger UI: http://localhost:8080/swagger-ui.html
 3. Install SonarLint plugin in IntelliJ
-4. Run code analysis: `./code-analysis.sh`
+4. Run code analysis: `./scripts/code-analysis.sh`
 
 ### For Testing
 1. Run all tests: `./mvnw test`
@@ -554,9 +598,24 @@ curl -X DELETE http://localhost:8080/api/recipes/1
 ## 📞 Support
 
 ### Documentation
-- **API Docs**: See `OPENAPI-*` files
-- **Testing**: See `*TEST*.md` files
-- **Code Quality**: See `CODE-ANALYSIS-*` files
+- **API Docs**: See `documentation/OPENAPI-*` files
+- **Testing**: See `documentation/*TEST*.md` files
+- **Code Quality**: See `documentation/CODE-ANALYSIS-*` files
+- **Security**: See `documentation/SECURITY-*` files
+- **Build**: See `documentation/BUILD-SUCCESS-FINAL.md`
+
+### Automation Scripts
+- **All Scripts**: See `scripts/` folder
+- **Code Analysis**: `./scripts/code-analysis.sh`
+- **Security**: `./scripts/security-check.sh`
+- **Testing**: `./scripts/run-unit-tests.sh`
+- **API Testing**: `./scripts/test-api.sh`
+
+### Configuration Files
+- **Code Quality**: See `code-quality/` folder
+- **Checkstyle**: `code-quality/intellij-java-google-style.xml`
+- **SpotBugs**: `code-quality/spotbugs-exclude.xml`
+- **Security**: `code-quality/dependency-check-suppressions.xml`
 
 ### Quick Help
 - **Commands**: See section "Quick Commands" above
